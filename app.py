@@ -40,7 +40,6 @@ def create_app(test_config=None):
     def get_movies(payload):
         try:
             movies = Movie.query.order_by(Movie.id).all()
-            print(movies)
             formatted_movies = [movie.format() for movie in movies]
 
             return jsonify({
@@ -59,7 +58,11 @@ def create_app(test_config=None):
             movie = Movie.query.get(movie_id)
 
             if movie is None:
-                abort(404, f'Movie with ID {movie_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Movie with ID {movie_id} not found.'
+                }), 404
 
             return jsonify({
                 'success': True,
@@ -92,7 +95,11 @@ def create_app(test_config=None):
             movie = Movie.query.get(movie_id)
 
             if movie is None:
-                abort(404, f'Movie with ID {movie_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Movie with ID {movie_id} not found.'
+                }), 404
 
             movie.delete()
 
@@ -111,7 +118,11 @@ def create_app(test_config=None):
             movie = Movie.query.get(movie_id)
 
             if movie is None:
-                abort(404, f'Movie with ID {movie_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Movie with ID {movie_id} not found.'
+                }), 404
 
             data = request.get_json()
 
@@ -156,7 +167,11 @@ def create_app(test_config=None):
             actor = Actor.query.get(actor_id)
 
             if actor is None:
-                abort(404, f'Actor with ID {actor_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Actor with ID {actor_id} not found.'
+                }), 404
 
             return jsonify({
                 'success': True,
@@ -189,7 +204,11 @@ def create_app(test_config=None):
             actor = Actor.query.get(actor_id)
 
             if actor is None:
-                abort(404, f'Actor with ID {actor_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Actor with ID {actor_id} not found.'
+                }), 404
 
             actor.delete()
 
@@ -208,7 +227,11 @@ def create_app(test_config=None):
             actor = Actor.query.get(actor_id)
 
             if actor is None:
-                abort(404, f'Actor with ID {actor_id} not found.')
+                return jsonify({
+                    'success': False,
+                    'error': 404,
+                    'message': f'Actor with ID {actor_id} not found.'
+                }), 404
 
             data = request.get_json()
 
